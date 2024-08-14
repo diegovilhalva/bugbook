@@ -23,3 +23,10 @@ export function formatRelativeDate(from: Date) {
     }
   }
 }
+
+export function formaNumber(n:number):string {
+  return Intl.NumberFormat("pt-BR",{
+    notation:"compact",
+    maximumFractionDigits:1
+  }).format(n)
+}
