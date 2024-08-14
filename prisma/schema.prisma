@@ -22,9 +22,10 @@ model User {
   email        String?   @unique
   passwordHash String
   googleId     String?   @unique
-  avatarUIrl   String?
+  avatarUrl    String?
   bio          String?
-  session      Session[]
+  sessions     Session[]
+  posts        Post[]
 
   createdAt DateTime @default(now())
 
@@ -38,4 +39,14 @@ model Session {
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("posts")
 }
