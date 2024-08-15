@@ -1,6 +1,7 @@
 "use client"
 
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer"
+
 import Post from "@/components/posts/Post"
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton"
 import { Button } from "@/components/ui/button"
@@ -50,5 +51,6 @@ export default function ForYouFeed() {
             <Post key={post.id} post={post} />
         ))}
       {isFetchingNextPage && <Loader2 className="mx-auto my-3 animate-spin" /> }
+     
     </InfiniteScrollContainer>
 }
