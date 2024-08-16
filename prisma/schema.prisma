@@ -20,24 +20,25 @@ model User {
   username     String    @unique
   displayName  String
   email        String?   @unique
-  passwordHash String
+  passwordHash String?
   googleId     String?   @unique
   avatarUrl    String?
   bio          String?
   sessions     Session[]
   posts        Post[]
-  following    Follow[] @relation("Following")
-  followers    Follow[] @relation("Followers")
-  createdAt    DateTime  @default(now())
-  
+  following    Follow[]  @relation("Following")
+  followers    Follow[]  @relation("Followers")
+
+  createdAt DateTime @default(now())
+
   @@map("users")
 }
 
 model Session {
   id        String   @id
-  userId    String?
+  userId    String
   expiresAt DateTime
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -56,7 +57,7 @@ model Post {
   id        String   @id @default(cuid())
   content   String
   userId    String
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@map("posts")

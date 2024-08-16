@@ -13,6 +13,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import UserPosts from "./UserPosts";
+import LinkiFy from "@/components/Linkify";
 
 interface PageProps {
     params: { username: string }
@@ -62,7 +63,7 @@ export default async function Page({ params: { username } }: PageProps) {
                     Postagens de {user.displayName}
                 </h2>
             </div>
-                <UserPosts userId={user.id}/>
+            <UserPosts userId={user.id} />
         </div>
         <TrendsSidebar />
     </main>
@@ -97,19 +98,22 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
                             {formaNumber(user._count.posts)}
                         </span>
                     </span>
-                    <FollowerCount userId={user.id} initialState={followerInfo}/>
+                    <FollowerCount userId={user.id} initialState={followerInfo} />
                 </div>
             </div>
             {user.id === loggedInUserId ? (
                 <Button>Editar Perfil</Button>
 
-            ): <FollowButton userId={user.id} initialState={followerInfo}/>}
+            ) : <FollowButton userId={user.id} initialState={followerInfo} />}
         </div>
         {user.bio && (<>
             <hr />
-            <div className="overflow-hidden whitespace-pre-line break-words">
-                {user.bio}
-            </div>
+            <LinkiFy>
+                <div className="overflow-hidden whitespace-pre-line break-words">
+                    {user.bio}
+                </div>
+            </LinkiFy>
+
         </>)}
     </div>
 }

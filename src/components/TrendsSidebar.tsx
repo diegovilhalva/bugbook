@@ -10,6 +10,7 @@ import { unstable_cache } from "next/cache"
 import { formaNumber } from "@/lib/utils"
 import FollowButton from "./FollowButton"
 import { getUserDataSelect } from "@/lib/types"
+import UserTooltip from "./UserTooltip"
 
 export default function TrendsSidebar() {
     return <div className="sticky top-[5.25rem] hidden md:block lg:w-80 w-72 h-fit flex-none space-y-5">
@@ -30,12 +31,12 @@ async function WhoToFollow() {
             NOT: {
                 id: user?.id
             },
-            followers:{
-                none:{
-                    followerId:user.id
+            followers: {
+                none: {
+                    followerId: user.id
                 }
             }
-            
+
         },
         select: getUserDataSelect(user.id),
         take: 5
@@ -47,22 +48,24 @@ async function WhoToFollow() {
         </div>
         {usersToFollow.map(user => (
             <div className="flex items-center justify-between gap-3" key={user.id}>
-                <Link href={`/users/${user.username}`}
-                    className="flex items-center gap-3">
-                    <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
-                    <div>
-                        <p className="line-clamp-1 break-all font-semibold hover:underline">
-                            {user.displayName}
-                        </p>
-                        <p className="line-clamp-1 break-all text-muted-foreground">
-                            @{user.username}
-                        </p>
-                    </div>
-                </Link>
+                <UserTooltip user={user}>
+                    <Link href={`/users/${user.username}`}
+                        className="flex items-center gap-3">
+                        <UserAvatar avatarUrl={user.avatarUrl} className="flex-none" />
+                        <div>
+                            <p className="line-clamp-1 break-all font-semibold hover:underline">
+                                {user.displayName}
+                            </p>
+                            <p className="line-clamp-1 break-all text-muted-foreground">
+                                @{user.username}
+                            </p>
+                        </div>
+                    </Link>
+                </UserTooltip>
                 <FollowButton userId={user.id} initialState={{
-                    followers:user._count.followers,
-                    isFollowedByUser:user.followers.some(
-                        ({followerId}) => followerId === user.id
+                    followers: user._count.followers,
+                    isFollowedByUser: user.followers.some(
+                        ({ followerId }) => followerId === user.id
                     )
                 }}></FollowButton>
             </div>
