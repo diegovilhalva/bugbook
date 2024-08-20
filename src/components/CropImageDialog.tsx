@@ -1,4 +1,5 @@
 import "cropperjs/dist/cropper.css";
+import "cropperjs/dist/cropper"
 import { useRef } from "react";
 import { Cropper, ReactCropperElement } from "react-cropper";
 import { Button } from "./ui/button";
@@ -28,10 +29,11 @@ export default function CropImageDialog({
   function crop() {
     const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
-    cropper.getCroppedCanvas().toBlob((blob) => onCropped(blob), "image/webp");
+    cropper.getCroppedCanvas({ maxWidth: 4096,
+      maxHeight: 4096}).toBlob((blob) => onCropped(blob), "image/webp");
     onClose();
   }
-
+  
   return (
     <Dialog open onOpenChange={onClose}>
       <DialogContent>
@@ -45,6 +47,7 @@ export default function CropImageDialog({
           zoomable={false}
           ref={cropperRef}
           className="mx-auto size-fit"
+         
         />
         <DialogFooter>
           <Button variant="secondary" onClick={onClose}>
