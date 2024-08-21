@@ -60,7 +60,7 @@ export default function PostEditor() {
       },
     );
   }
-
+  console.log(input)
   return (
     <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex gap-5">
@@ -90,7 +90,7 @@ export default function PostEditor() {
         <LoadingButton
           onClick={onSubmit}
           loading={mutation.isPending}
-          disabled={!input.trim() && attachments.length === 0 || isUploading}
+          disabled={!input.trim() || isUploading}
           className="min-w-20"
         >
           Postar

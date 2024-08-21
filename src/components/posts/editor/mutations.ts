@@ -60,7 +60,7 @@ export function useSubmitPostMutation() {
       });
 
       toast({
-        description: "Postam criada",
+        description: "Postagem criada",
       });
     },
     onError(error) {
