@@ -75,19 +75,14 @@ This project is a social networking platform built with modern technologies such
    ```
    Replace the placeholders with your actual database connection string, Google OAuth credentials, and Stream Chat API keys.
 
-4. **Run database migrations**:
-   ```bash
-   npx prisma migrate dev
-   ```
 
-5. **Start the development server**:
+
+4. **Start the development server**:
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
-6. **Visit your application**:
+8. **Visit your application**:
    Open [http://localhost:3000](http://localhost:3000) in your browser to see the application in action.
 
 ## Usage
