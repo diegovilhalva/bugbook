@@ -36,8 +36,8 @@ This project is a social networking platform built with modern technologies such
 
 ### Prerequisites
 
-- **Node.js** (version 16 or higher)
-- **npm** or **yarn**
+- **Node.js** (version 20 or higher)
+- **npm** 
 - **PostgreSQL** installed and running
 
 ### Installation
@@ -50,9 +50,7 @@ This project is a social networking platform built with modern technologies such
 
 2. **Install dependencies**:
    ```bash
-   npm install
-   # or
-   yarn install
+   npm i --legacy-peer-deps
    ```
 
 3. **Set up environment variables**:
