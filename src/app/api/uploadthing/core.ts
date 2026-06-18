@@ -26,7 +26,7 @@ export const fileRouter = {
         await new UTApi().deleteFiles(key);
       }
 
-      const newAvatarUrl = file.url;
+      const newAvatarUrl = file.ufsUrl;
 
       await Promise.all([
         prisma.user.update({
@@ -59,7 +59,7 @@ export const fileRouter = {
     .onUploadComplete(async ({ file }) => {
       const media = await prisma.media.create({
         data: {
-         url: file.url,
+         url: file.ufsUrl,
           type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
         },
       });

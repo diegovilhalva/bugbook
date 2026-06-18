@@ -23,10 +23,16 @@ export async function GET(req: Request) {
                 url: true
             }
         })
-       new UTApi().deleteFiles(
-    unusedMedia.map(m => m.url.split("/").pop())
-)
 
+        if (unusedMedia.length > 0) {
+            try {
+                await new UTApi().deleteFiles(
+                    unusedMedia.map(m => m.url.split("/").pop()!)
+                )
+            } catch (deleteError) {
+                console.error("Erro ao deletar arquivos no UploadThing:", deleteError)
+            }
+        }
 
         await prisma.media.deleteMany({
             where: {
